@@ -6,8 +6,11 @@ import { shallow } from 'enzyme';
 import App from './app';
 
 describe('<App />', () => {
-  it('Should render "Hello React"', () => {
-    const wrapper = shallow(<App />);
-    expect(wrapper.text()).to.equal('Hello React');
+  let wrapper;
+  before(() => {
+    wrapper = shallow(<App />);
+  });
+  it('Should have one <Header/> Component', () => {
+    expect(wrapper.find('Header').length).to.equal(1);
   });
 });
