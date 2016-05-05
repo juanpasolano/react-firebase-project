@@ -1,0 +1,103 @@
+@for $i from 0 through 20 {
+  $mobile-multiplayer: 10px;
+  .spacer-#{$i} {
+    width: 100%;
+    clear: both;
+    height: 10px*$i;
+    @media screen and (max-width: 710px) {
+      height: $mobile-multiplayer*$i;
+    }
+  }
+  .m-v-#{$i} {
+    margin-top: 10px*$i;
+    margin-bottom: 10px*$i;
+    @media screen and (max-width: 710px) {
+      margin-top: $mobile-multiplayer*$i;
+      margin-bottom: $mobile-multiplayer*$i;
+    }
+  }
+  .m-h-#{$i} {
+    margin-left: 10px*$i;
+    margin-right: 10px*$i;
+    @media screen and (max-width: 710px) {
+      margin-left: $mobile-multiplayer*$i;
+      margin-right: $mobile-multiplayer*$i;
+    }
+  }
+  .m-#{$i} {
+    margin: 10px*$i;
+    @media screen and (max-width: 710px) {
+      margin: $mobile-multiplayer*$i;
+    }
+  }
+  .m-t-#{$i} {
+    margin-top: 10px*$i;
+    @media screen and (max-width: 710px) {
+      margin-top: $mobile-multiplayer*$i;
+    }
+  }
+  .m-b-#{$i} {
+    margin-bottom: 10px*$i;
+    @media screen and (max-width: 710px) {
+      margin-bottom: $mobile-multiplayer*$i;
+    }
+  }
+  .m-r-#{$i} {
+    margin-right: 10px*$i;
+    @media screen and (max-width: 710px) {
+      margin-right: $mobile-multiplayer*$i;
+    }
+  }
+  .m-l-#{$i} {
+    margin-left: 10px*$i;
+    @media screen and (max-width: 710px) {
+      margin-left: $mobile-multiplayer*$i;
+    }
+  }
+  .p-#{$i} {
+    padding: 10px*$i;
+    @media screen and (max-width: 710px) {
+      padding: $mobile-multiplayer*$i;
+    }
+  }
+  .p-v-#{$i} {
+    padding-top: 10px*$i;
+    padding-bottom: 10px*$i;
+    @media screen and (max-width: 710px) {
+      padding-top: $mobile-multiplayer*$i;
+      padding-bottom: $mobile-multiplayer*$i;
+    }
+  }
+  .p-h-#{$i} {
+    padding-left: 10px*$i;
+    padding-right: 10px*$i;
+    @media screen and (max-width: 710px) {
+      padding-left: $mobile-multiplayer*$i;
+      padding-right: $mobile-multiplayer*$i;
+    }
+  }
+  .p-t-#{$i} {
+    padding-top: 10px*$i;
+    @media screen and (max-width: 710px) {
+      padding-top: $mobile-multiplayer*$i;
+    }
+  }
+  .p-b-#{$i} {
+    padding-bottom: 10px*$i;
+    @media screen and (max-width: 710px) {
+      padding-bottom: $mobile-multiplayer*$i;
+    }
+  }
+  .p-r-#{$i} {
+    padding-right: 10px*$i;
+    @media screen and (max-width: 710px) {
+      padding-right: $mobile-multiplayer*$i;
+    }
+  }
+  .p-l-#{$i} {
+    padding-left: 10px*$i;
+    @media screen and (max-width: 710px) {
+      padding-left: $mobile-multiplayer*$i;
+    }
+  }
+}
