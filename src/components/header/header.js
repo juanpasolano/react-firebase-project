@@ -29,7 +29,7 @@ export default class Header extends Component {
           <div className={navigationClasses}>
             <ul className="nav navbar-nav">
               <li>
-                <Link to="hello">Classes </Link>
+                <Link to="/">Classes </Link>
               </li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
