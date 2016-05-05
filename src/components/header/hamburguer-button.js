@@ -17,5 +17,5 @@ export default class HamburguerButton extends Component {
 }
 
 HamburguerButton.propTypes = {
-  onClick: PropTypes.function
+  onClick: PropTypes.func
 };
