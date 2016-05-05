@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux';
+import classes from './classesReducer';
 
 const rootReducer = combineReducers({
-  test: function(state = 'test', action){
-    return state;
-  }
+  classes
 });
 
 export default rootReducer;

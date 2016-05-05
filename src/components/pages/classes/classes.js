@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import CardList from '../../cards-list/cards-list';
 
 export class Classes extends Component {
+
   render() {
     return (
       <div>
         <h1>Classes</h1>
-        <pre>{this.props.test}</pre>
+        <div>
+          <CardList list={this.props.classes} />
+        </div>
       </div>
     );
   }
@@ -15,6 +19,6 @@ export class Classes extends Component {
 
 export default connect(
   (state) => ({
-    test: state.test
+    classes: state.classes
   })
 )(Classes);
