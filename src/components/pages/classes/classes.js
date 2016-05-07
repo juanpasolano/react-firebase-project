@@ -23,7 +23,5 @@ Classes.propTypes = {
 };
 
 export default connect(
-  (state) => ({
-    classes: state.classes
-  })
+  ({classes}) => ({classes:classes})
 )(Classes);

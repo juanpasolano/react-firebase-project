@@ -12,7 +12,7 @@ require('./favicon.ico');
 import './styles/styles.scss';
 
 
-render(
+export default render(
   <Provider store={configureStore()}>
     <Router history={browserHistory} routes={routes} />
   </Provider>

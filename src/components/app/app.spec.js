@@ -10,7 +10,4 @@ describe('<App />', () => {
   before(() => {
     wrapper = shallow(<App />);
   });
-  it('Should have one <Header/> Component', () => {
-    expect(wrapper.find('Header').length).to.equal(1);
-  });
 });
