@@ -26,7 +26,7 @@ class Login extends Component {
 
   componentWillUpdate(nextProps) {
     if(nextProps.auth && !nextProps.auth.error){
-      browserHistory.push('/classes');
+      browserHistory.push('/lectures');
     }
   }
 
@@ -34,7 +34,7 @@ class Login extends Component {
     if(_.get(this, 'props.auth.profile')){
       return (
         <div className="text-center m-t-2">
-          <Link to="/classes">
+          <Link to="/lectures">
             Continue as {this.props.auth.profile.email}
           </Link>
           <hr/>

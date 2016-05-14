@@ -4,18 +4,18 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 
-import { Classes } from './classes';
+import { Lectures } from './lectures';
 
-describe('<Classes />', () => {
+describe('<Lectures />', () => {
   let wrapper;
   before(() => {
     let props = {
       classes:[]
     };
-    wrapper = shallow(<Classes {...props}/>);
+    wrapper = shallow(<Lectures {...props}/>);
   });
-  it('should have a "Classes" title', () => {
-    expect(wrapper.find('h1').text()).to.equal('Classes');
+  it('should have a "Lectures" title', () => {
+    expect(wrapper.find('h1').text()).to.equal('Lectures');
   });
   it('should have a card list when given classes=[]', () => {
     expect(wrapper.find('CardsList').length).to.equal(1);

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 
 export default class CardsList extends Component {
@@ -8,12 +9,14 @@ export default class CardsList extends Component {
   renderList() {
     if (!this.props.list || this.props.list.length === 0) {
       return (
-        <span>There are no classes available</span>
+        <div className="col-md-12">
+          <span>There are no lectures available</span>
+        </div>
       );
     } else {
-      return this.props.list.map((elem, index) => {
+      return _.map(this.props.list, (elem, id) => {
         return (
-          <div className="col-md-3" key={index}>
+          <div className="col-md-3" key={id}>
             <div className="thumbnail">
               <div className="caption">
                 <h3 className="m-t-0">{elem.title}</h3>
@@ -39,7 +42,7 @@ export default class CardsList extends Component {
 }
 
 CardsList.propTypes = {
-  list: PropTypes.array,
+  list: PropTypes.object,
   onButtonClick: PropTypes.func,
   buttonLabel: PropTypes.string
 };

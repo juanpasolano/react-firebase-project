@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import classes from './classesReducer';
+import lectures from './lecturesReducer';
 import ui from './uiReducer';
 import auth from './authReducer';
 
 const rootReducer = combineReducers({
-  classes,
+  lectures,
   ui,
   auth
 });

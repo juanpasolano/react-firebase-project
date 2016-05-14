@@ -18,7 +18,7 @@ let baseRef = new Firebase(C.FIREBASE_URL);
 
 export function replaceAuth(auth) {
   return {
-    type: C.AUTH_REPLEACE,
+    type: C.AUTH_REPLACE,
     value: auth
   };
 }
@@ -69,4 +69,32 @@ export function unauth() {
     baseRef.unauth();
     dispatch(replaceAuth(null));
   };
+}
+
+
+/**
+ * Lectures
+ */
+
+
+let lecturesRef = baseRef.child("lectures");
+
+export function replaceLectures(lectures) {
+  console.log(lectures);
+  return {
+    type: C.LECTURES_REPLACE,
+    value: lectures
+  }
+}
+
+export function fetchLectures() {
+  return (dispatch) => {
+    lecturesRef.on('value', (snapshot) => {
+      dispatch(replaceLectures(snapshot.val()));
+    });
+  }
+}
+
+export function saveLecture(lecture) {
+  return dispatch => lecturesRef.push(lecture);
 }

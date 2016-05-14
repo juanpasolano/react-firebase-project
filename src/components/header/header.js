@@ -36,7 +36,7 @@ export class Header extends Component {
           <div className={navigationClasses}>
             <ul className="nav navbar-nav">
               <li>
-                <Link to="/classes">Classes </Link>
+                <Link to="/Lectures">Lectures</Link>
               </li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
