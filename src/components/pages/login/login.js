@@ -1,10 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import { Link, browserHistory } from 'react-router';
+import _ from 'lodash';
 import * as actions from '../../../redux/actions';
 
 
+
 class Login extends Component {
+  static propTypes = {
+    actions: PropTypes.object
+  };
+
   onFormSubmit(e) {
     e.preventDefault();
     const credentials = {
@@ -13,9 +20,33 @@ class Login extends Component {
     };
     this.props.actions.authWithPassword(credentials);
   }
+  componentWillMount() {
+    this.props.actions.getAuth();
+  }
+
+  componentWillUpdate(nextProps) {
+    if(nextProps.auth && !nextProps.auth.error){
+      browserHistory.push('/classes');
+    }
+  }
+
+  loggedUser() {
+    if(_.get(this, 'props.auth.profile')){
+      return (
+        <div className="text-center m-t-2">
+          <Link to="/classes">
+            Continue as {this.props.auth.profile.email}
+          </Link>
+          <hr/>
+        </div>
+      )
+    }
+  }
+
   render () {
     return (
       <div>
+        {this.loggedUser()}
         <form onSubmit={this.onFormSubmit.bind(this)}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -32,13 +63,8 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  actions: PropTypes.object
-};
-
-
 export default connect(
-  null,
+  ({auth}) => ({auth}),
   (dispatch) => {
     return {
       actions: bindActionCreators(actions, dispatch)

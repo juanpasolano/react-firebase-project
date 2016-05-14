@@ -8,9 +8,18 @@ import classNames from 'classnames';
 import HamburguerButton from './hamburguer-button';
 
 export class Header extends Component {
+  static propTypes = {
+    actions: PropTypes.object,
+    isHeaderNavigationOpen: PropTypes.bool
+  };
+
   toggleNavigation() {
     let isOpen = (this.props.isHeaderNavigationOpen !== true);
     this.props.actions.toggleHeaderNavigation(isOpen);
+  }
+
+  logout() {
+    this.props.actions.unauth();
   }
 
   render() {
@@ -27,11 +36,11 @@ export class Header extends Component {
           <div className={navigationClasses}>
             <ul className="nav navbar-nav">
               <li>
-                <Link to="/">Classes </Link>
+                <Link to="/classes">Classes </Link>
               </li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-              <li><a href="" target="_blank">Sign out <i className="zmdi zmdi-sign-in zmdi-hc-lg"></i></a></li>
+              <li><a onClick={this.logout.bind(this)} >Sign out <i className="zmdi zmdi-sign-in zmdi-hc-lg"></i></a></li>
             </ul>
           </div>
         </div>
@@ -39,11 +48,6 @@ export class Header extends Component {
     );
   }
 }
-
-Header.propTypes = {
-  actions: PropTypes.object,
-  isHeaderNavigationOpen: PropTypes.bool
-};
 
 export default connect(
   ({ui}) => ({
