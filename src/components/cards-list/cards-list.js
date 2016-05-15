@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 
 export default class CardsList extends Component {
-  onButtonClick (elem) {
-    if(this.props.onButtonClick) this.props.onButtonClick(elem);
+  onButtonClick (elem, id) {
+    if(this.props.onButtonClick) this.props.onButtonClick(elem, id);
   }
 
   renderList() {
@@ -22,7 +22,7 @@ export default class CardsList extends Component {
                 <h3 className="m-t-0">{elem.title}</h3>
                 <p>{elem.description}</p>
                 <p>
-                  <a href="#" className="btn btn-primary" role="button" onClick={(e)=>{this.onButtonClick(elem)}}>{this.props.buttonLabel || 'Button'}</a>
+                  <a href="#" className="btn btn-primary" role="button" onClick={(e)=>{this.onButtonClick(elem, id)}}>{this.props.buttonLabel || 'Button'}</a>
                 </p>
               </div>
             </div>

@@ -15,16 +15,33 @@ export class Lectures extends Component {
     this.props.actions.fetchLectures();
   }
 
-  onCardListButtonClick(elem) {
-    console.log(elem);
+  onCardListButtonClick(elem, id) {
+    if(_.get(this.props, 'auth.profile.role')){
+      switch(this.props.auth.profile.role){
+        case 'student':{
+          this.props.actions.addAssistantToLecture(id, this.props.auth.uid, this.props.auth.profile)
+        }
+      }
+    }
   }
+
+  buttonLabel() {
+    if(_.get(this.props, 'auth.profile.role')){
+      switch(this.props.auth.profile.role){
+        case 'student':{
+          return 'Assist'
+        }
+      }
+    }
+  }
+  
   render() {
     return (
       <div>
         <h1>Lectures</h1>
         <Link className="btn btn-primary" to="/lectures/new">New Lecture</Link>
         <div>
-          <CardList list={this.props.lectures} buttonLabel="Assisted" onButtonClick={this.onCardListButtonClick} />
+          <CardList list={this.props.lectures} buttonLabel={this.buttonLabel()} onButtonClick={this.onCardListButtonClick.bind(this)} />
         </div>
       </div>
     );
@@ -32,7 +49,7 @@ export class Lectures extends Component {
 }
 
 export default connect(
-  ({lectures}) => ({lectures}),
+  ({lectures, auth}) => ({lectures, auth}),
   (dispatch) => {
     return {
       actions: bindActionCreators(actions, dispatch)

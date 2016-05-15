@@ -81,7 +81,6 @@ export function unauth() {
 let lecturesRef = baseRef.child("lectures");
 
 export function replaceLectures(lectures) {
-  console.log(lectures);
   return {
     type: C.LECTURES_REPLACE,
     value: lectures
@@ -98,4 +97,8 @@ export function fetchLectures() {
 
 export function saveLecture(lecture) {
   return dispatch => lecturesRef.push(lecture);
+}
+
+export function addAssistantToLecture(lectureId, userId, profile) {
+  return dispatch => lecturesRef.child(lectureId).child("assisted").child(userId).set({...profile, date: new Date().getTime()});
 }
