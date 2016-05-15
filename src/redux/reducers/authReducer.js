@@ -1,7 +1,6 @@
 import C from '../constants';
-const INITIAL_STATE = null;
 
-export default function authReducer(state = INITIAL_STATE, action) {
+export default function authReducer(state = null, action) {
   switch (action.type) {
     case C.AUTH_REPLACE: {
       return action.value

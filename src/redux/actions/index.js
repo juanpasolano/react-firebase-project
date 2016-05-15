@@ -1,4 +1,5 @@
 import Firebase from 'firebase';
+import _ from 'lodash';
 import C from '../constants';
 
 export function toggleHeaderNavigation(isOpen) {

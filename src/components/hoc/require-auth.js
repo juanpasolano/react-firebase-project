@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import {Router} from 'react-router';
-
 import {connect} from 'react-redux';
+import  * as actions from '../../redux/actions';
 
 
 function mapStateToProps(state) {
@@ -10,7 +10,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default ComposedComponent => connect(mapStateToProps)(
+export default ComposedComponent => connect(mapStateToProps, actions)(
   class RequireAuth extends Component {
 
     static propTypes = {
