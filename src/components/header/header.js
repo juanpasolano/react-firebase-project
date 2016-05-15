@@ -35,7 +35,7 @@ export class Header extends Component {
             </li>
           </ul>
           <ul className="nav navbar-nav navbar-right">
-            <li><a href="javascript:;" onClick={this.logout.bind(this)} >Sign out <i className="zmdi zmdi-sign-in zmdi-hc-lg"></i></a></li>
+            <li><a href="javascript:;" onClick={this.logout.bind(this)} >Sign out <i className="zmdi zmdi-sign-in zmdi-hc-lg"/></a></li>
           </ul>
         </div>
       )

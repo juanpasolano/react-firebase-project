@@ -20,15 +20,18 @@ export default ComposedComponent => connect(mapStateToProps, actions)(
       router: PropTypes.object.isRequired
     };
 
-    componentWillUpdate(nextProps) {
-      if (!nextProps.auth || nextProps.auth.error) {
-        this.context.router.push('/login');
-      }
+    componentWillMount() {
+      this.props.getAuth();
     }
 
+    componentWillUpdate(nextProps) {
+      if (!nextProps.auth || nextProps.auth.error) {
+        //this.context.router.push('/login');
+      }
+    }
     componentDidMount() {
       if (!this.props.auth) {
-        this.context.router.push('/login');
+        //this.context.router.push('/login');
       }
     }
 

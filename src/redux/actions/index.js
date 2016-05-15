@@ -1,6 +1,7 @@
 import Firebase from 'firebase';
 import _ from 'lodash';
 import C from '../constants';
+import faker from 'faker';
 
 export function toggleHeaderNavigation(isOpen) {
   return {
@@ -99,6 +100,22 @@ export function saveLecture(lecture) {
   return dispatch => lecturesRef.push(lecture);
 }
 
-export function addAssistantToLecture(lectureId, userId, profile) {
-  return dispatch => lecturesRef.child(lectureId).child("assisted").child(userId).set({...profile, date: new Date().getTime()});
+export function addAttendeeToLecture(lectureId, userId, profile) {
+  return dispatch => lecturesRef.child(lectureId).child("attendees").child(userId).set({...profile, date: new Date().getTime()});
+}
+
+export function removeAttendeeFromLecture(lectureId, userId) {
+  return dispatch => lecturesRef.child(lectureId).child("attendees").child(userId).remove();
+}
+export function acceptAttendeeOnLecture(lectureId, userId){
+  return dispatch => lecturesRef.child(lectureId).child("attendees").child(userId).child('accepted').set(true);
+}
+
+export function addRandomAttendeeToLecture(lectureId){
+  return dispatch => {
+    var name = faker.name.findName();
+    var email = faker.internet.email();
+    var date = new Date().getTime();
+    lecturesRef.child(lectureId).child("attendees").push({name, email, date});
+  }
 }
