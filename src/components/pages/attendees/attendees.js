@@ -19,7 +19,7 @@ class Attendees extends Component {
     if(elem.accepted === undefined){
       return (
         <div className="btn-group pull-right">
-          <button onClick={()=>{this.props.actions.removeAttendeeFromLecture(this.props.routeParams.id, id)}} className="btn btn-xs btn-danger">Reject</button>
+          <button onClick={()=>{this.props.actions.rejectAttendeeOnLecture(this.props.routeParams.id, id)}} className="btn btn-xs btn-danger">Reject</button>
           <button onClick={()=>{this.props.actions.acceptAttendeeOnLecture(this.props.routeParams.id, id)}}className="btn btn-xs btn-success">Accept</button>
         </div>
       );
@@ -31,8 +31,8 @@ class Attendees extends Component {
       )
     }else if(elem.accepted === false){
       return (
-        <span className="pull-right text-success">
-          <i className="zmdi zmdi-check zmdi-hc-2x"/>
+        <span className="pull-right text-danger">
+          <i className="zmdi zmdi-close zmdi-hc-2x"/>
         </span>
       )
     }

@@ -18,13 +18,13 @@ export class Lectures extends Component {
   }
 
   addAttendee(elem, id) {
-    if(_.get(this.props, 'auth.profile')) {
+    if (_.get(this.props, 'auth.profile')) {
       this.props.actions.addAttendeeToLecture(id, this.props.auth.uid, this.props.auth.profile)
     }
   }
 
   removeAttendee(elem, id) {
-    if(_.get(this.props, 'auth.profile')) {
+    if (_.get(this.props, 'auth.profile')) {
       this.props.actions.removeAttendeeFromLecture(id, this.props.auth.uid)
     }
   }
@@ -36,8 +36,16 @@ export class Lectures extends Component {
         {
           if (elem.attendees && elem.attendees[this.props.auth.uid]) {
             return (
-              <a href="#" className="btn btn-default btn-sm" role="button"
-                 onClick={(e)=>{this.removeAttendee(elem, id);}}>I did not attended</a>
+              <div>
+                <a href="#" className="btn btn-default btn-sm" role="button"
+                   onClick={(e)=>{this.removeAttendee(elem, id);}}>I did not attended</a>
+                <span className="m-l-2">{(elem.attendees[this.props.auth.uid].accepted !== undefined) ?
+                  (elem.attendees[this.props.auth.uid].accepted) ?
+                  <span className="text-success">Assistance accepted</span> :
+                    <span className="text-danger">Assistance Rejected</span> : ''}
+                </span>
+              </div>
+
             )
           } else {
             return (
@@ -48,11 +56,15 @@ export class Lectures extends Component {
         }
         case 'teacher':
         {
-          if(elem.attendees) {
+          if (elem.attendees) {
             return (
-              <Link to={`/lectures/${id}/attendees`} className="btn btn-primary btn-sm" role="button">See attendees</Link>
+              <div>
+              <Link to={`/lectures/${id}/attendees`} className="btn btn-primary btn-sm" role="button">See
+                attendees</Link>
+                <Link to={`/lectures/edit/${id}`} className="btn btn-primary btn-sm" role="button">Edit lecture</Link>
+              </div>
             );
-          }else {
+          } else {
             return (
               <button className="btn btn-default btn-sm" disabled role="button"> No attendees</button>
             );
@@ -81,9 +93,7 @@ export class Lectures extends Component {
               <div className="caption">
                 <h3 className="m-t-0">{elem.title}</h3>
                 <p>{elem.description}</p>
-                <p>
-                  {this.renderButton(elem, id)}
-                </p>
+                {this.renderButton(elem, id)}
               </div>
             </div>
           </div>
@@ -91,6 +101,7 @@ export class Lectures extends Component {
       });
     }
   }
+
   renderNewLectureButton() {
     if (_.get(this.props, 'auth.profile.role')) {
       switch (this.props.auth.profile.role) {

@@ -99,16 +99,22 @@ export function fetchLectures() {
 export function saveLecture(lecture) {
   return dispatch => lecturesRef.push(lecture);
 }
+export function updateLecture(lectureId, lecture) {
+  return dispatch => lecturesRef.child(lectureId).update(lecture);
+}
 
 export function addAttendeeToLecture(lectureId, userId, profile) {
-  return dispatch => lecturesRef.child(lectureId).child("attendees").child(userId).set({...profile, date: new Date().getTime()});
+  return dispatch => lecturesRef.child(`${lectureId}/attendees/${userId}`).set({...profile, date: new Date().getTime()});
 }
 
 export function removeAttendeeFromLecture(lectureId, userId) {
-  return dispatch => lecturesRef.child(lectureId).child("attendees").child(userId).remove();
+  return dispatch => lecturesRef.child(`${lectureId}/attendees/${userId}`).remove();
 }
 export function acceptAttendeeOnLecture(lectureId, userId){
-  return dispatch => lecturesRef.child(lectureId).child("attendees").child(userId).child('accepted').set(true);
+  return dispatch => lecturesRef.child(`${lectureId}/attendees/${userId}/accepted`).set(true);
+}
+export function rejectAttendeeOnLecture(lectureId, userId){
+  return dispatch => lecturesRef.child(`${lectureId}/attendees/${userId}/accepted`).set(false);
 }
 
 export function addRandomAttendeeToLecture(lectureId){
@@ -116,6 +122,6 @@ export function addRandomAttendeeToLecture(lectureId){
     var name = faker.name.findName();
     var email = faker.internet.email();
     var date = new Date().getTime();
-    lecturesRef.child(lectureId).child("attendees").push({name, email, date});
+    lecturesRef.child(`${lectureId}/attendees/`).push({name, email, date});
   }
 }

@@ -17,8 +17,25 @@ export class LecturesForm extends Component {
       title: title.value,
       description: description.value
     };
-    this.props.actions.saveLecture(lecture);
-    this.resetForm();
+    if(this.props.routeParams.id) {
+      this.props.actions.updateLecture(this.props.routeParams.id, lecture);
+    }else {
+      this.props.actions.saveLecture(lecture);
+      this.resetForm();
+    }
+  }
+  componentWillUpdate(nextProps){
+    if(nextProps.lectures && this.props.routeParams.id && nextProps.lectures[this.props.routeParams.id]){
+      let lecture = nextProps.lectures[this.props.routeParams.id];
+      let {title, description} = this.refs.form;
+      title.value = lecture.title;
+      description.value = lecture.description;
+    }
+  }
+  componentWillMount () {
+    if(this.props.routeParams.id){
+      this.props.actions.fetchLectures();
+    }
   }
   render() {
     return (
@@ -38,7 +55,6 @@ export class LecturesForm extends Component {
               <label htmlFor="description">Description</label>
               <textarea name="description" cols="30" rows="5" className="form-control" />
             </div>
-
             <button type="submit" className="btn btn-primary">Save</button>
           </form>
         </div>
@@ -48,7 +64,7 @@ export class LecturesForm extends Component {
 }
 
 export default connect(
-  null,
+  ({lectures})=> ({lectures}),
   (dispatch) => {
     return {
       actions: bindActionCreators(actions, dispatch)
