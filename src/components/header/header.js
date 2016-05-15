@@ -22,10 +22,28 @@ export class Header extends Component {
     this.props.actions.unauth();
   }
 
+  navigation() {
+    if(this.props.auth && !this.props.auth.error){
+      let navigationClasses = classNames('navbar-collapse collapse', {
+        'in': this.props.isHeaderNavigationOpen
+      });
+      return (
+        <div className={navigationClasses}>
+          <ul className="nav navbar-nav">
+            <li>
+              <Link to="/lectures">Lectures</Link>
+            </li>
+          </ul>
+          <ul className="nav navbar-nav navbar-right">
+            <li><a href="javascript:;" onClick={this.logout.bind(this)} >Sign out <i className="zmdi zmdi-sign-in zmdi-hc-lg"></i></a></li>
+          </ul>
+        </div>
+      )
+    }
+  }
+
   render() {
-    let navigationClasses = classNames('navbar-collapse collapse', {
-      'in': this.props.isHeaderNavigationOpen
-    });
+
     return (
       <div className="navbar navbar-default navbar-fixed-top">
         <div className="container">
@@ -33,16 +51,7 @@ export class Header extends Component {
             <Link to="/" className="navbar-brand">Toptal React academy</Link>
             <HamburguerButton onClick={this.toggleNavigation.bind(this)}/>
           </div>
-          <div className={navigationClasses}>
-            <ul className="nav navbar-nav">
-              <li>
-                <Link to="/Lectures">Lectures</Link>
-              </li>
-            </ul>
-            <ul className="nav navbar-nav navbar-right">
-              <li><a onClick={this.logout.bind(this)} >Sign out <i className="zmdi zmdi-sign-in zmdi-hc-lg"></i></a></li>
-            </ul>
-          </div>
+          {this.navigation()}
         </div>
       </div>
     );
@@ -50,8 +59,9 @@ export class Header extends Component {
 }
 
 export default connect(
-  ({ui}) => ({
-    isHeaderNavigationOpen: ui.isHeaderNavigationOpen
+  ({ui, auth}) => ({
+    isHeaderNavigationOpen: ui.isHeaderNavigationOpen,
+    auth
   }),
   (dispatch) => {
     return {

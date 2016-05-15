@@ -22,13 +22,13 @@ export default ComposedComponent => connect(mapStateToProps)(
 
     componentWillUpdate(nextProps) {
       if (!nextProps.auth || nextProps.auth.error) {
-        this.context.router.push('login');
+        this.context.router.push('/login');
       }
     }
 
     componentDidMount() {
       if (!this.props.auth) {
-        this.context.router.push('login');
+        this.context.router.push('/login');
       }
     }
 
