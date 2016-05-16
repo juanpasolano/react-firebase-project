@@ -26,7 +26,7 @@ class Login extends Component {
 
   componentWillUpdate(nextProps) {
     if(nextProps.auth && !nextProps.auth.error){
-      //browserHistory.push('/lectures');
+      browserHistory.push('/lectures');
     }
   }
 

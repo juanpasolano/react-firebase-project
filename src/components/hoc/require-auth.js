@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from "react";
 import {Router} from 'react-router';
 import {connect} from 'react-redux';
 import  * as actions from '../../redux/actions';
+import Firebase from 'firebase';
+import C from '../../redux/constants';
 
 
 function mapStateToProps(state) {
@@ -26,12 +28,13 @@ export default ComposedComponent => connect(mapStateToProps, actions)(
 
     componentWillUpdate(nextProps) {
       if (!nextProps.auth || nextProps.auth.error) {
-        //this.context.router.push('/login');
+        this.context.router.push('/');
       }
     }
     componentDidMount() {
-      if (!this.props.auth) {
-        //this.context.router.push('/login');
+      let ref = new Firebase(C.FIREBASE_URL);
+      if (!ref.getAuth()) {
+        this.context.router.push('/');
       }
     }
 
