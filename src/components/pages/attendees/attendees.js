@@ -16,20 +16,24 @@ class Attendees extends Component {
   }
 
   renderButtons(elem, id) {
-    if(elem.accepted === undefined){
+    if (elem.accepted === undefined) {
       return (
         <div className="btn-group pull-right">
-          <button onClick={()=>{this.props.actions.rejectAttendeeOnLecture(this.props.routeParams.id, id)}} className="btn btn-xs btn-danger">Reject</button>
-          <button onClick={()=>{this.props.actions.acceptAttendeeOnLecture(this.props.routeParams.id, id)}}className="btn btn-xs btn-success">Accept</button>
+          <button onClick={()=>{this.props.actions.rejectAttendeeOnLecture(this.props.routeParams.id, id)}}
+                  className="btn btn-xs btn-danger">Reject
+          </button>
+          <button onClick={()=>{this.props.actions.acceptAttendeeOnLecture(this.props.routeParams.id, id)}}
+                  className="btn btn-xs btn-success">Accept
+          </button>
         </div>
       );
-    }else if(elem.accepted){
+    } else if (elem.accepted) {
       return (
         <span className="pull-right text-success">
           <i className="zmdi zmdi-check zmdi-hc-2x"/>
         </span>
       )
-    }else if(elem.accepted === false){
+    } else if (elem.accepted === false) {
       return (
         <span className="pull-right text-danger">
           <i className="zmdi zmdi-close zmdi-hc-2x"/>
@@ -38,16 +42,25 @@ class Attendees extends Component {
     }
   }
 
-  renderAttendees (lecture) {
-    if(lecture && lecture.attendees){
+  renderAttendees(lecture) {
+    if (lecture && lecture.attendees) {
       return _.map(lecture.attendees, (elem, id) => {
         return (
           <li key={id} className="list-group-item">
             {this.renderButtons(elem, id)}
-            {elem.name} <br/><small>At: {new Date(elem.date).toDateString()}</small>
+            {elem.name} <br/>
+            <small>At: {new Date(elem.date).toDateString()}</small>
           </li>
         )
       })
+    }
+  }
+
+  canAddRandomUser() {
+    if (_.get(this.props, 'auth.profile.accessLevel') > 2) {
+      return <button className="btn btn-sm btn-default" onClick={()=>{this.props.actions.addRandomAttendeeToLecture(this.props.routeParams.id)}}>
+        Add random user
+      </button>
     }
   }
 
@@ -57,15 +70,16 @@ class Attendees extends Component {
       <div>
         <ol className="breadcrumb">
           <li><Link to="/lectures">Lectures</Link></li>
-          <li className="active">Attendees to {(lecture)? lecture.title : ''}</li>
+          <li className="active">Attendees to {(lecture) ? lecture.title : ''}</li>
         </ol>
-        <h1><small>Attendees to </small>
-          <br/>{(lecture)? lecture.title : ''}</h1>
+        <h1>
+          <small>Attendees to</small>
+          <br/>{(lecture) ? lecture.title : ''}</h1>
         <ul className="list-group">
           {this.renderAttendees(lecture)}
         </ul>
-
-        <button onClick={()=>{this.props.actions.addRandomAttendeeToLecture(this.props.routeParams.id)}}>Add random user</button>
+        {this.canAddRandomUser()}
+        <div className="spacer-4"></div>
       </div>
     );
   }

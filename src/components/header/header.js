@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../redux/actions';
 import classNames from 'classnames';
+import _ from 'lodash';
 
 import HamburguerButton from './hamburguer-button';
 
@@ -27,17 +28,28 @@ export class Header extends Component {
       let navigationClasses = classNames('navbar-collapse collapse', {
         'in': this.props.isHeaderNavigationOpen
       });
+      let canChangeAccessLevel = () => {
+        console.log(_.get(this.props, 'auth.profile.role'));
+
+        if(_.get(this.props, 'auth.profile.role') == 'admin' ){
+          return(
+            <li>
+              <ul>
+                <li><a onClick={()=>{this.props.actions.switchAccessLevel(1)}}>1</a></li>
+                <li><a onClick={()=>{this.props.actions.switchAccessLevel(2)}}>2</a></li>
+                <li><a onClick={()=>{this.props.actions.switchAccessLevel(3)}}>3</a></li>
+              </ul>
+            </li>
+          )
+        }
+      };
       return (
         <div className={navigationClasses}>
           <ul className="nav navbar-nav">
             <li>
               <Link to="/lectures">Lectures</Link>
             </li>
-            <li>
-              <a onClick={()=>{this.props.actions.switchAccessLevel(1)}}>1</a>/
-              <a onClick={()=>{this.props.actions.switchAccessLevel(2)}}>2</a>/
-              <a onClick={()=>{this.props.actions.switchAccessLevel(3)}}>3</a>/
-            </li>
+            {canChangeAccessLevel()}
           </ul>
           <ul className="nav navbar-nav navbar-right">
             <li><a href="javascript:;" onClick={this.logout.bind(this)} >Sign out <i className="zmdi zmdi-sign-in zmdi-hc-lg"/></a></li>

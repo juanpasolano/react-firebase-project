@@ -25,7 +25,7 @@ export class LectureCard extends Component {
     }
   }
   hasStudentButtons() {
-    if(this.props.accessLevel > 0) {
+    if(this.props.accessLevel === 1 || this.props.accessLevel === 3) {
       if (this.props.lecture.attendees && this.props.lecture.attendees[this.props.auth.uid]) {
         return (
           <div>
@@ -74,11 +74,11 @@ export class LectureCard extends Component {
   renderButtons() {
     return (
       <div>
-        <div className="pull-right">
+        {this.hasStudentButtons()}
+        <div>
           {this.hasAttendeesButton()}
           {this.hasEditButton()}
         </div>
-        {this.hasStudentButtons()}
       </div>
     );
   }
