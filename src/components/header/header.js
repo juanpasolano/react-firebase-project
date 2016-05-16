@@ -33,6 +33,11 @@ export class Header extends Component {
             <li>
               <Link to="/lectures">Lectures</Link>
             </li>
+            <li>
+              <a onClick={()=>{this.props.actions.switchAccessLevel(1)}}>1</a>/
+              <a onClick={()=>{this.props.actions.switchAccessLevel(2)}}>2</a>/
+              <a onClick={()=>{this.props.actions.switchAccessLevel(3)}}>3</a>/
+            </li>
           </ul>
           <ul className="nav navbar-nav navbar-right">
             <li><a href="javascript:;" onClick={this.logout.bind(this)} >Sign out <i className="zmdi zmdi-sign-in zmdi-hc-lg"/></a></li>

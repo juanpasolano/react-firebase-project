@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import CardList from '../../cards-list/cards-list';
 import { Link } from 'react-router';
 import _ from 'lodash';
+import LectureCard from './lecture-card';
 
 export class Lectures extends Component {
   static propTypes = {
@@ -17,67 +18,6 @@ export class Lectures extends Component {
     this.props.actions.fetchLectures();
   }
 
-  addAttendee(elem, id) {
-    if (_.get(this.props, 'auth.profile')) {
-      this.props.actions.addAttendeeToLecture(id, this.props.auth.uid, this.props.auth.profile)
-    }
-  }
-
-  removeAttendee(elem, id) {
-    if (_.get(this.props, 'auth.profile')) {
-      this.props.actions.removeAttendeeFromLecture(id, this.props.auth.uid)
-    }
-  }
-
-  renderButton(elem, id) {
-    if (_.get(this.props, 'auth.profile.role')) {
-      switch (this.props.auth.profile.role) {
-        case 'student':
-        {
-          if (elem.attendees && elem.attendees[this.props.auth.uid]) {
-            return (
-              <div>
-                <a href="#" className="btn btn-default btn-sm" role="button"
-                   onClick={(e)=>{this.removeAttendee(elem, id);}}>I did not attended</a>
-                <span className="m-l-2">{(elem.attendees[this.props.auth.uid].accepted !== undefined) ?
-                  (elem.attendees[this.props.auth.uid].accepted) ?
-                  <span className="text-success">Assistance accepted</span> :
-                    <span className="text-danger">Assistance Rejected</span> : ''}
-                </span>
-              </div>
-
-            )
-          } else {
-            return (
-              <a href="#" className="btn btn-primary btn-sm" role="button"
-                 onClick={(e)=>{this.addAttendee(elem, id);}}>I attended</a>
-            );
-          }
-        }
-        case 'teacher':
-        {
-          if (elem.attendees) {
-            return (
-              <div>
-              <Link to={`/lectures/${id}/attendees`} className="btn btn-primary btn-sm" role="button">See
-                attendees</Link>
-                <Link to={`/lectures/edit/${id}`} className="btn btn-primary btn-sm" role="button">Edit lecture</Link>
-              </div>
-            );
-          } else {
-            return (
-              <button className="btn btn-default btn-sm" disabled role="button"> No attendees</button>
-            );
-          }
-        }
-        default:
-        {
-          return null;
-        }
-      }
-    }
-  }
-
   renderList() {
     if (!this.props.lectures || this.props.lectures.length === 0) {
       return (
@@ -88,28 +28,16 @@ export class Lectures extends Component {
     } else {
       return _.map(this.props.lectures, (elem, id) => {
         return (
-          <div className="col-md-3 col-sm-6" key={id}>
-            <div className="thumbnail">
-              <div className="caption">
-                <h3 className="m-t-0">{elem.title}</h3>
-                <p>{elem.description}</p>
-                {this.renderButton(elem, id)}
-              </div>
-            </div>
-          </div>
+          <LectureCard lecture={elem} lectureId={id} accessLevel={_.get(this.props, 'auth.profile.accessLevel')}
+                       auth={this.props.auth} key={id}/>
         );
       });
     }
   }
 
   renderNewLectureButton() {
-    if (_.get(this.props, 'auth.profile.role')) {
-      switch (this.props.auth.profile.role) {
-        case 'teacher':
-        {
-          return (<Link className="btn btn-primary btn-sm pull-right" to="/lectures/new">New Lecture</Link>);
-        }
-      }
+    if (_.get(this.props, 'auth.profile.accessLevel') && this.props.auth.profile.accessLevel > 1) {
+      return (<Link className="btn btn-primary btn-sm pull-right" to="/lectures/new">New Lecture</Link>);
     }
   }
 

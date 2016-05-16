@@ -8,6 +8,9 @@ export default function authReducer(state = null, action) {
     case C.PROFILE_REPLACE: {
       return {...state, profile: action.value}
     }
+    case C.ACCESS_LEVEL_REPLACE: {
+      return {...state, profile: {...state.profile, accessLevel: action.value}}
+    }
     default:
       return state
   }

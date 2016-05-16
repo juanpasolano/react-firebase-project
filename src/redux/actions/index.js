@@ -73,6 +73,13 @@ export function unauth() {
   };
 }
 
+export function switchAccessLevel(level) {
+  return {
+    type: C.ACCESS_LEVEL_REPLACE,
+    value: level
+  };
+}
+
 
 /**
  * Lectures
