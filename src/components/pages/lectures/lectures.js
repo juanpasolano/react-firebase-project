@@ -18,7 +18,7 @@ export class Lectures extends Component {
   }
 
   renderList() {
-    if (!this.props.lectures || this.props.lectures.length === 0) {
+    if (!this.props.lectures || _.isEmpty(this.props.lectures) || this.props.lectures.length === 0) {
       return (
         <div className="col-md-12">
           <span>There are no lectures available</span>

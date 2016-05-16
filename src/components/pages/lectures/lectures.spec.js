@@ -3,21 +3,42 @@ import sinon from 'sinon';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
-
 import { Lectures } from './lectures';
 
 describe('<Lectures />', () => {
-  let wrapper;
-  before(() => {
-    let props = {
-      classes:[]
-    };
-    wrapper = shallow(<Lectures {...props}/>);
+
+  describe('When empty list', () => {
+    let wrapper, fetchLecturesSpy;
+    before(() => {
+      fetchLecturesSpy = sinon.spy();
+      let props = {
+        lectures: {},
+        actions: {fetchLectures: fetchLecturesSpy}
+      };
+      wrapper = shallow(<Lectures {...props}/>);
+    });
+    it('should have a "Lectures" title', () => {
+      expect(wrapper.find('h1').text()).to.equal('Lectures');
+    });
+    it('should show "There are no lectures available"', () => {
+      expect(wrapper.text()).to.contain('There are no lectures available');
+    });
+    it('should call fetchLectures once', () => {
+      expect(fetchLecturesSpy.calledOnce).to.equal(true);
+    });
   });
-  it('should have a "Lectures" title', () => {
-    expect(wrapper.find('h1').text()).to.equal('Lectures');
-  });
-  it('should have a card list when given classes=[]', () => {
-    expect(wrapper.find('CardsList').length).to.equal(1);
+
+  describe('When list', () => {
+    let wrapper, fetchLecturesSpy;
+    before(() => {
+      fetchLecturesSpy = sinon.spy();
+      let props = {
+        lectures: {"sfkd-896dkh-ods23":{title: 'ax34561-s', description: 'dscrpt13on'}},
+        actions: {fetchLectures: fetchLecturesSpy}
+      };
+      wrapper = shallow(<Lectures {...props}/>);
+    });
+    it('should render list of lectures', ()=> {
+    })
   })
 });
