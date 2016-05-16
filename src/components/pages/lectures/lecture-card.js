@@ -9,19 +9,18 @@ export class LectureCard extends Component {
     auth: PropTypes.object,
     lecture: PropTypes.object,
     lectureId: PropTypes.string,
-    role: PropTypes.number,
-    actions: PropTypes.object
+    role: PropTypes.number
   };
 
   addAttendee() {
     if (this.props.accessLevel) {
-      this.props.actions.addAttendeeToLecture(this.props.lectureId, this.props.auth.uid, this.props.auth.profile);
+      this.props.addAttendeeToLecture(this.props.lectureId, this.props.auth.uid, this.props.auth.profile);
     }
   }
 
   removeAttendee() {
     if (this.props.accessLevel) {
-      this.props.actions.removeAttendeeFromLecture(this.props.lectureId, this.props.auth.uid);
+      this.props.removeAttendeeFromLecture(this.props.lectureId, this.props.auth.uid);
     }
   }
   hasStudentButtons() {
@@ -98,8 +97,4 @@ export class LectureCard extends Component {
   }
 }
 
-export default connect(null,(dispatch) => {
-  return {
-    actions: bindActionCreators(actions, dispatch)
-  };
-})(LectureCard);
+export default connect(null, actions)(LectureCard);

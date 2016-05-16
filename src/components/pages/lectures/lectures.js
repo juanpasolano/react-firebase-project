@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import * as actions from '../../../redux/actions';
 import { connect } from 'react-redux';
-import CardList from '../../cards-list/cards-list';
 import { Link } from 'react-router';
 import _ from 'lodash';
 import LectureCard from './lecture-card';

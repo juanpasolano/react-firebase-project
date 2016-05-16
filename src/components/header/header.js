@@ -29,8 +29,6 @@ export class Header extends Component {
         'in': this.props.isHeaderNavigationOpen
       });
       let canChangeAccessLevel = () => {
-        console.log(_.get(this.props, 'auth.profile.role'));
-
         if(_.get(this.props, 'auth.profile.role') == 'admin' ){
           return(
             <li>
