@@ -17,7 +17,7 @@ export default ComposedComponent => connect(mapStateToProps, actions)(
 
     static propTypes = {
       auth: PropTypes.object,
-      getAuth: PropTypes.fn
+      getAuth: PropTypes.func
     };
     static contextTypes = {
       router: PropTypes.object.isRequired

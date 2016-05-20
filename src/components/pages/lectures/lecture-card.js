@@ -11,8 +11,8 @@ export class LectureCard extends Component {
     lectureId: PropTypes.string,
     accessLevel: PropTypes.number,
     actions: PropTypes.number,
-    addAttendeeToLecture: PropTypes.fn,
-    removeAttendeeFromLecture: PropTypes.fn,
+    addAttendeeToLecture: PropTypes.func,
+    removeAttendeeFromLecture: PropTypes.func,
     role: PropTypes.number
   };
 

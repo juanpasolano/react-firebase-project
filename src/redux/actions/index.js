@@ -48,7 +48,6 @@ export function getProfile() {
       profileRef.once('value', function(snapshot) {
         dispatch(replaceProfile(snapshot.val()));
       }, function(error) {
-        alert(error);
       });
     }
   };
@@ -59,6 +58,7 @@ export function authWithPassword(credentials) {
     baseRef.authWithPassword(credentials, function (error, authData) {
       if (error) {
         dispatch(replaceAuth({error:true, ...error}));
+        alert(error);
       } else {
         dispatch(replaceAuth(authData));
         dispatch(getProfile());
