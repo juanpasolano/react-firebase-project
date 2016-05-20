@@ -5,6 +5,23 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 export class LecturesForm extends Component {
+  static propTypes = {
+    actions: PropTypes.object,
+    routeParams: PropTypes.object
+  };
+  componentWillMount () {
+    if(this.props.routeParams.id){
+      this.props.actions.fetchLectures();
+    }
+  }
+  componentWillUpdate(nextProps){
+    if(nextProps.lectures && this.props.routeParams.id && nextProps.lectures[this.props.routeParams.id]){
+      let lecture = nextProps.lectures[this.props.routeParams.id];
+      let {title, description} = this.refs.form;
+      title.value = lecture.title;
+      description.value = lecture.description;
+    }
+  }
   resetForm (){
     let {title, description} = this.refs.form;
     title.value = "";
@@ -22,19 +39,6 @@ export class LecturesForm extends Component {
     }else {
       this.props.actions.saveLecture(lecture);
       this.resetForm();
-    }
-  }
-  componentWillUpdate(nextProps){
-    if(nextProps.lectures && this.props.routeParams.id && nextProps.lectures[this.props.routeParams.id]){
-      let lecture = nextProps.lectures[this.props.routeParams.id];
-      let {title, description} = this.refs.form;
-      title.value = lecture.title;
-      description.value = lecture.description;
-    }
-  }
-  componentWillMount () {
-    if(this.props.routeParams.id){
-      this.props.actions.fetchLectures();
     }
   }
   render() {

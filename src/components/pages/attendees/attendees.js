@@ -6,9 +6,11 @@ import _ from 'lodash';
 import * as actions from '../../../redux/actions';
 
 
-class Attendees extends Component {
+export class Attendees extends Component {
   static propTypes = {
-    lectures: PropTypes.object
+    lectures: PropTypes.object,
+    routeParams: PropTypes.object,
+    actions: PropTypes.object
   };
 
   componentWillMount() {
@@ -19,10 +21,10 @@ class Attendees extends Component {
     if (elem.accepted === undefined) {
       return (
         <div className="btn-group pull-right">
-          <button onClick={()=>{this.props.actions.rejectAttendeeOnLecture(this.props.routeParams.id, id)}}
+          <button onClick={()=>{this.props.actions.rejectAttendeeOnLecture(this.props.routeParams.id, id);}}
                   className="btn btn-xs btn-danger">Reject
           </button>
-          <button onClick={()=>{this.props.actions.acceptAttendeeOnLecture(this.props.routeParams.id, id)}}
+          <button onClick={()=>{this.props.actions.acceptAttendeeOnLecture(this.props.routeParams.id, id);}}
                   className="btn btn-xs btn-success">Accept
           </button>
         </div>
@@ -32,13 +34,13 @@ class Attendees extends Component {
         <span className="pull-right text-success">
           <i className="zmdi zmdi-check zmdi-hc-2x"/>
         </span>
-      )
+      );
     } else if (elem.accepted === false) {
       return (
         <span className="pull-right text-danger">
           <i className="zmdi zmdi-close zmdi-hc-2x"/>
         </span>
-      )
+      );
     }
   }
 
@@ -51,16 +53,22 @@ class Attendees extends Component {
             {elem.name} <br/>
             <small>At: {new Date(elem.date).toDateString()}</small>
           </li>
-        )
-      })
+        );
+      });
+    } else {
+      return (
+        <li className="list-group-item">There are no attendees to this lecture yet!</li>
+      );
     }
   }
 
   canAddRandomUser() {
     if (_.get(this.props, 'auth.profile.accessLevel') > 2) {
-      return <button className="btn btn-sm btn-default" onClick={()=>{this.props.actions.addRandomAttendeeToLecture(this.props.routeParams.id)}}>
-        Add random user
-      </button>
+      return (
+        <button className="btn btn-sm btn-default" onClick={()=>{this.props.actions.addRandomAttendeeToLecture(this.props.routeParams.id);}}>
+          Add random user
+        </button>
+      );
     }
   }
 

@@ -29,7 +29,7 @@ export function replaceProfile(profile) {
   return {
     type: C.PROFILE_REPLACE,
     value: profile
-  }
+  };
 }
 
 //Gets called by the app.js to initialize with current session
@@ -48,10 +48,10 @@ export function getProfile() {
       profileRef.once('value', function(snapshot) {
         dispatch(replaceProfile(snapshot.val()));
       }, function(error) {
-        console.log(error);
+        alert(error);
       });
     }
-  }
+  };
 }
 
 export function authWithPassword(credentials) {
@@ -92,7 +92,7 @@ export function replaceLectures(lectures) {
   return {
     type: C.LECTURES_REPLACE,
     value: lectures
-  }
+  };
 }
 
 export function fetchLectures() {
@@ -100,7 +100,7 @@ export function fetchLectures() {
     lecturesRef.on('value', (snapshot) => {
       dispatch(replaceLectures(snapshot.val()));
     });
-  }
+  };
 }
 
 export function saveLecture(lecture) {
@@ -126,9 +126,9 @@ export function rejectAttendeeOnLecture(lectureId, userId){
 
 export function addRandomAttendeeToLecture(lectureId){
   return dispatch => {
-    var name = faker.name.findName();
-    var email = faker.internet.email();
-    var date = new Date().getTime();
+    let name = faker.name.findName();
+    let email = faker.internet.email();
+    let date = new Date().getTime();
     lecturesRef.child(`${lectureId}/attendees/`).push({name, email, date});
-  }
+  };
 }

@@ -9,17 +9,9 @@ import * as actions from '../../../redux/actions';
 
 class Login extends Component {
   static propTypes = {
-    actions: PropTypes.object
+    actions: PropTypes.object,
+    auth: PropTypes.object
   };
-
-  onFormSubmit(e) {
-    e.preventDefault();
-    const credentials = {
-      email: this.refs.email.value,
-      password: this.refs.password.value
-    };
-    this.props.actions.authWithPassword(credentials);
-  }
   componentWillMount() {
     this.props.actions.getAuth();
   }
@@ -28,6 +20,15 @@ class Login extends Component {
     if(nextProps.auth && !nextProps.auth.error){
       browserHistory.push('/lectures');
     }
+  }
+
+  onFormSubmit(e) {
+    e.preventDefault();
+    const credentials = {
+      email: this.refs.email.value,
+      password: this.refs.password.value
+    };
+    this.props.actions.authWithPassword(credentials);
   }
 
   loggedUser() {
@@ -39,7 +40,7 @@ class Login extends Component {
           </Link>
           <hr/>
         </div>
-      )
+      );
     }
   }
 

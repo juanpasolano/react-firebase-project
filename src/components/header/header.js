@@ -11,6 +11,7 @@ import HamburguerButton from './hamburguer-button';
 export class Header extends Component {
   static propTypes = {
     actions: PropTypes.object,
+    auth: PropTypes.object,
     isHeaderNavigationOpen: PropTypes.bool
   };
 
@@ -33,12 +34,12 @@ export class Header extends Component {
           return(
             <li>
               <ul>
-                <li><a onClick={()=>{this.props.actions.switchAccessLevel(1)}}>1</a></li>
-                <li><a onClick={()=>{this.props.actions.switchAccessLevel(2)}}>2</a></li>
-                <li><a onClick={()=>{this.props.actions.switchAccessLevel(3)}}>3</a></li>
+                <li><a onClick={()=>{this.props.actions.switchAccessLevel(1);}}>1</a></li>
+                <li><a onClick={()=>{this.props.actions.switchAccessLevel(2);}}>2</a></li>
+                <li><a onClick={()=>{this.props.actions.switchAccessLevel(3);}}>3</a></li>
               </ul>
             </li>
-          )
+          );
         }
       };
       return (
@@ -53,7 +54,7 @@ export class Header extends Component {
             <li><a href="javascript:;" onClick={this.logout.bind(this)} >Sign out <i className="zmdi zmdi-sign-in zmdi-hc-lg"/></a></li>
           </ul>
         </div>
-      )
+      );
     }
   }
 

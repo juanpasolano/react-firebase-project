@@ -9,6 +9,10 @@ export class LectureCard extends Component {
     auth: PropTypes.object,
     lecture: PropTypes.object,
     lectureId: PropTypes.string,
+    accessLevel: PropTypes.number,
+    actions: PropTypes.number,
+    addAttendeeToLecture: PropTypes.fn,
+    removeAttendeeFromLecture: PropTypes.fn,
     role: PropTypes.number
   };
 
@@ -65,7 +69,7 @@ export class LectureCard extends Component {
       return (
         <Link to={`/lectures/edit/${this.props.lectureId}`} className="btn btn-primary btn-sm" role="button">Edit
           lecture</Link>
-      )
+      );
     }
   }
 

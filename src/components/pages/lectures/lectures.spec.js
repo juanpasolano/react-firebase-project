@@ -39,6 +39,7 @@ describe('<Lectures />', () => {
       wrapper = shallow(<Lectures {...props}/>);
     });
     it('should render list of lectures', ()=> {
-    })
-  })
+      //TODO: Cannot render connected components grgr!
+    });
+  });
 });

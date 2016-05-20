@@ -7,3 +7,18 @@ body {
 .breadcrumb {
   background: white;
 }
+.row-lectures > div:nth-child(4n+1) {
+  clear: left;
+}
+
+@media (max-width: 768px) {
+  .row-lectures > div:nth-child(2n+1) {
+    clear: left;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 990px) {
+  .row-lectures > div:nth-child(2n+1) {
+    clear: left;
+  }
+}

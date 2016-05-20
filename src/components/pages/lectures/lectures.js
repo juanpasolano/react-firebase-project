@@ -49,7 +49,7 @@ export class Lectures extends Component {
             <h1>Lectures</h1>
           </div>
         </div>
-        <div className="row">
+        <div className="row row-lectures">
           {this.renderList()}
         </div>
       </div>

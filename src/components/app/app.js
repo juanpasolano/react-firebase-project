@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Header from '../header/header';
 
 export default class App extends Component {
-
+  static propTypes = {
+    children: PropTypes.object
+  };
+  
   render () {
     return (
       <div>
